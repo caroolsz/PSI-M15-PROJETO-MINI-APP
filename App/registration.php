@@ -19,8 +19,8 @@
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
         // $create_datetime = date("Y-m-d H:i:s");
-        $query    = "INSERT into `utilizador` (utilizador, password, email)
-                     VALUES ('$utilizador', '" . md5($password) . "', '$email')";
+        $query    = "INSERT into `utilizador` (utilizador, password, email, Funcao_id)
+                     VALUES ('$utilizador', '" . md5($password) . "', '$email', 2)";
         $result   = mysqli_query($con, $query);
         if ($result) {
             echo "<div class='form'>

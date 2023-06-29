@@ -16,17 +16,20 @@
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
         // Check user is exist in the database
-        $query    = "SELECT * FROM `users` WHERE utilizador='$utilizador'
+        $query    = "SELECT * FROM `utilizador` WHERE utilizador='$utilizador'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($con, $query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
         if ($rows == 1) {
             $_SESSION['utilizador'] = $utilizador;
-            // Redirect to user dashboard page
-            header("Location: dashboard.php");
+            if ($utilizador_data['Funcao_id'] == 1) {
+                header("Location: admin_dashboard.php");
+            } else {
+                header("Location: user_dashboard.php");
+            }
         } else {
             echo "<div class='form'>
-                  <h3>Incorrect utilizador/password.</h3><br/>
+                  <h3>Incorrect user/password.</h3><br/>
                   <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
                   </div>";
         }
